@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FlashCards</title>
+</head>
+
+
+<!--    <b><u>{{flashcard}}</u></b><br/>-->
+
+<br/>
+    {% for flashcard in flashcards %}
+<ul>
+    <b><u>{{flashcard.title}}</u></b><br/>
+    {% for bulletpoint in flashcard.bulletpoint_set.all %}
+     <li>{{ bulletpoint.point }}</li>
+
+    {% endfor %}
+
+            <form  method="POST" action="/flashcards/editFlashcard/{{flashcard.title}}/">
+                {% csrf_token %}
+                  </br>
+                    New Point <input type="text" name="bulletpoint"> </br>  </br>
+                  <button type="submit">Add New Point</button>
+            </form>
+</ul>
+
+
+    {% endfor %}
+
+
+                <form  method="POST" action="/flashcards/createflashcardform/">
+                {% csrf_token %}
+                  </br>
+
+                  <button type="submit">Add New Flashcard</button>
+            </form>
+
+</body>
+</html>

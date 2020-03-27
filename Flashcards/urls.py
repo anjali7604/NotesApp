@@ -6,7 +6,7 @@ urlpatterns = [
     # ex: /polls/
     path('', views.firstview),
     # ex: /polls/5/
-    path('bulletpoints/<int:flashcardid>/', views.bulletpoints),
+    path('FlashCard/<title>/', views.bulletpoints),
     path('flashcards/', views.flashcards),
     path('createflashcard/', views.createflashcard),
     path('createflashcardform/',views.createflashcardform),

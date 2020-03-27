@@ -5,13 +5,14 @@ from Flashcards.models import FlashCard
 from django.utils import timezone
 from django.shortcuts import redirect
 def firstview(request):
+    # FlashCard.objects.all().filter(id=2).delete()
     return HttpResponse("My First View from Django!!")
 
 
-def bulletpoints(request, flashcardid):
-    flashcard = FlashCard.objects.get(id=flashcardid)
-    print(flashcardid,flashcard.title)
-    print(FlashCard.objects.all())
+def bulletpoints(request, title):
+    flashcard = (FlashCard.objects.all().filter(title = title))[0]
+    # print(flashcardid,flashcard.title)
+    # print(FlashCard.objects.all())
     bulletpoints = flashcard.bulletpoint_set.all()
     bulletpointlist=[bulletpoint.point for bulletpoint in bulletpoints]
     # output=" -- \n".join(bulletpoints)

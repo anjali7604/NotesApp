@@ -6,13 +6,37 @@
 </head>
 
 
-    <b><u>{{flashcard}}</u></b><br/>
+<!--    <b><u>{{flashcard}}</u></b><br/>-->
 
-<br/>
-    {% for point in bulletpointslist %}
-        <li>{{ point }}</li>
-    {% endfor %}
+<!--<br/>-->
+<!--    {% for point in bulletpointslist %}-->
+<!--        <li>{{ point }}</li>-->
+<!--    {% endfor %}-->
+{% load static%}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js">
+<div class="container">
+     <ul class="list-group" >
+<!--    <b><u>{{flashcard.title}}</u></b><br/>-->
+         <div class="panel panel-info">
+          <div class="panel-heading">{{flashcard}}</div>
+             <div class="panel-body">
+              {% for point in bulletpointslist %}
+              <li class="list-group-item">{{ point }}</li>
 
+              {% endfor %}
+
+                    <form  method="POST" action="/flashcards/editFlashcard/{{flashcard}}/">
+                        {% csrf_token %}
+                                 <div class="form-group">
+                                  <label >Add New Point </label>    <input type="text" class="form-control" name="bulletpoint">
+                                 </div>
+                        <button type="submit" class="btn btn-info">Add New Point</button>
+                    </form>
+             </div>
+         </div>
+     </ul>
+</div>
 
 </body>
 </html>

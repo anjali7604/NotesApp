@@ -7,34 +7,65 @@
 
 
 <!--    <b><u>{{flashcard}}</u></b><br/>-->
+{% load static%}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js">
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">NotesApp</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="#">Link</a></li>
+<!--      <li><a href="#">Link</a></li>-->
+    </ul>
+<!--    <button class="btn btn-danger navbar-btn">Button</button>-->
+       <button type="submit" class="btn btn-danger navbar-btn"><a href="/flashcards/createflashcardform/">Add New Flashcard</a>  </button>
+  </div>
+</nav>
 
 <br/>
     {% for flashcard in flashcards %}
-<ul>
-    <b><u>{{flashcard.title}}</u></b><br/>
-    {% for bulletpoint in flashcard.bulletpoint_set.all %}
-     <li>{{ bulletpoint.point }}</li>
+ <div class="container">
+     <ul class="list-group" >
+<!--    <b><u>{{flashcard.title}}</u></b><br/>-->
+         <div class="panel panel-info">
+             <div class="panel-heading"><a href="/flashcards/FlashCard/{{flashcard.title}}/">{{flashcard.title}}</a></div>
+             <div class="panel-body">
+              {% for bulletpoint in flashcard.bulletpoint_set.all %}
+              <li class="list-group-item">{{ bulletpoint.point }}</li>
 
+              {% endfor %}
+
+                    <form  method="POST" action="/flashcards/editFlashcard/{{flashcard.title}}/">
+                        {% csrf_token %}
+                                 <div class="form-group">
+                                  <label >Add New Point </label>    <input type="text" class="form-control" name="bulletpoint">
+                                 </div>
+                        <button type="submit" class="btn btn-info">Add New Point</button>
+                    </form>
+             </div>
+         </div>
+<!--      {% for bulletpoint in flashcard.bulletpoint_set.all %}-->
+<!--      <li class="list-group-item">{{ bulletpoint.point }}<span class="badge"></span></li>-->
+
+<!--      {% endfor %}-->
+
+<!--            <form  method="POST" action="/flashcards/editFlashcard/{{flashcard.title}}/">-->
+<!--                {% csrf_token %}-->
+<!--                 <div class="form-group">-->
+<!--                  <label c>New Point </label>    <input type="text" class="form-control" name="bulletpoint">-->
+<!--                 </div>-->
+<!--                <button type="submit" class="btn btn-info">Add New Point</button>-->
+<!--            </form>-->
+      </ul>
+
+     </div>
     {% endfor %}
 
-            <form  method="POST" action="/flashcards/editFlashcard/{{flashcard.title}}/">
-                {% csrf_token %}
-                  </br>
-                    New Point <input type="text" name="bulletpoint"> </br>  </br>
-                  <button type="submit">Add New Point</button>
-            </form>
-</ul>
 
 
-    {% endfor %}
-
-
-                <form  method="POST" action="/flashcards/createflashcardform/">
-                {% csrf_token %}
-                  </br>
-
-                  <button type="submit">Add New Flashcard</button>
-            </form>
 
 </body>
 </html>

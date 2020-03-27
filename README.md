@@ -1,0 +1,2 @@
+# NotesApp
+First Django Project
